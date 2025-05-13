@@ -34,6 +34,17 @@ export interface BlocksSectionHeading extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksSectionYoutube extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_section_youtubes';
+  info: {
+    description: '';
+    displayName: 'Section Youtube';
+  };
+  attributes: {
+    Clip: Schema.Attribute.Component<'shared.youtube-clip', true>;
+  };
+}
+
 export interface LayoutBanner extends Struct.ComponentSchema {
   collectionName: 'components_layout_banners';
   info: {
@@ -122,12 +133,24 @@ export interface SharedMap extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedYoutubeClip extends Struct.ComponentSchema {
+  collectionName: 'components_shared_youtube_clips';
+  info: {
+    displayName: 'youtubeClip';
+  };
+  attributes: {
+    clip: Schema.Attribute.Blocks;
+    Heading: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.card-grid': BlocksCardGrid;
       'blocks.hero': BlocksHero;
       'blocks.section-heading': BlocksSectionHeading;
+      'blocks.section-youtube': BlocksSectionYoutube;
       'layout.banner': LayoutBanner;
       'layout.footer': LayoutFooter;
       'layout.header': LayoutHeader;
@@ -135,6 +158,7 @@ declare module '@strapi/strapi' {
       'shared.hero-banner': SharedHeroBanner;
       'shared.link': SharedLink;
       'shared.map': SharedMap;
+      'shared.youtube-clip': SharedYoutubeClip;
     }
   }
 }

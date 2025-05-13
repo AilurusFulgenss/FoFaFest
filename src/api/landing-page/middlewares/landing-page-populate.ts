@@ -3,13 +3,20 @@
  */
 
 import type { Core } from '@strapi/strapi';
+import globalPopulate from '../../global/middlewares/global-populate';
 
 const populate = {
   blocks:{
     on:{
       "blocks.hero":{
         populate:{
-          HeroPicture: true,
+          HeroPicture:{
+            populate:{
+              Image:{
+                fields:["alternativeText", "url"]
+              }
+            }
+          }
         }
       },
       "blocks.section-heading": true,
@@ -17,16 +24,21 @@ const populate = {
         populate:{
           Card:{
             populate:{
-              Image:{
-                feilds:["alternativeText", "url"]
+              cardImage:{
+                fields:["alternativeText", "url"]
               }
             }
           }
-          }
-        }  
+        }
+      },
+      "blocks.section-youtube":{
+        populate:{
+          Clip: true,
+        }
       }
     }
   }
+}
 
 export default (config, { strapi }: { strapi: Core.Strapi }) => {
   // Add your own logic here.

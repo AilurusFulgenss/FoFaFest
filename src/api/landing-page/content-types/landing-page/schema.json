@@ -22,7 +22,8 @@
       "components": [
         "blocks.hero",
         "blocks.section-heading",
-        "blocks.card-grid"
+        "blocks.card-grid",
+        "blocks.section-youtube"
       ]
     }
   }
