@@ -373,6 +373,67 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiActivityVdoActivityVdo extends Struct.SingleTypeSchema {
+  collectionName: 'activity_vdos';
+  info: {
+    description: '';
+    displayName: 'ActivityVDO';
+    pluralName: 'activity-vdos';
+    singularName: 'activity-vdo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-vdo.activity-vdo'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    YoutubeBlocks: Schema.Attribute.DynamicZone<['blocks.section-youtube']>;
+  };
+}
+
+export interface ApiDownloadPageDownloadPage extends Struct.SingleTypeSchema {
+  collectionName: 'download_pages';
+  info: {
+    description: '';
+    displayName: 'DownloadPage';
+    pluralName: 'download-pages';
+    singularName: 'download-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    LoadBlocks: Schema.Attribute.DynamicZone<['blocks.activity-card']>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::download-page.download-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -410,7 +471,7 @@ export interface ApiLandingPageLandingPage extends Struct.SingleTypeSchema {
   collectionName: 'landing_pages';
   info: {
     description: '';
-    displayName: 'Landing Page';
+    displayName: 'homePage';
     pluralName: 'landing-pages';
     singularName: 'landing-page';
   };
@@ -424,6 +485,7 @@ export interface ApiLandingPageLandingPage extends Struct.SingleTypeSchema {
         'blocks.section-heading',
         'blocks.card-grid',
         'blocks.section-youtube',
+        'blocks.calendar',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -438,6 +500,36 @@ export interface ApiLandingPageLandingPage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProjectAndActivitieProjectAndActivitie
+  extends Struct.SingleTypeSchema {
+  collectionName: 'project_and_activities';
+  info: {
+    description: '';
+    displayName: 'Project&Activities';
+    pluralName: 'project-and-activities';
+    singularName: 'project-and-activitie';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Card: Schema.Attribute.DynamicZone<['blocks.activity-card']>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-and-activitie.project-and-activitie'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -953,8 +1045,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::activity-vdo.activity-vdo': ApiActivityVdoActivityVdo;
+      'api::download-page.download-page': ApiDownloadPageDownloadPage;
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
+      'api::project-and-activitie.project-and-activitie': ApiProjectAndActivitieProjectAndActivitie;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "landing-page",
     "pluralName": "landing-pages",
-    "displayName": "Landing Page",
+    "displayName": "homePage",
     "description": ""
   },
   "options": {
@@ -23,7 +23,8 @@
         "blocks.hero",
         "blocks.section-heading",
         "blocks.card-grid",
-        "blocks.section-youtube"
+        "blocks.section-youtube",
+        "blocks.calendar"
       ]
     }
   }

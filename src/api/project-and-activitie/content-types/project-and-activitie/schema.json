@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "project_and_activities",
+  "info": {
+    "singularName": "project-and-activitie",
+    "pluralName": "project-and-activities",
+    "displayName": "Project&Activities",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Card": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.activity-card"
+      ]
+    }
+  }
+}

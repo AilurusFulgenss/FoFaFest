@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "download_pages",
+  "info": {
+    "singularName": "download-page",
+    "pluralName": "download-pages",
+    "displayName": "DownloadPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "LoadBlocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.activity-card"
+      ]
+    }
+  }
+}

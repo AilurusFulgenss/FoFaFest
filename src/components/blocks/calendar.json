@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_calendars",
+  "info": {
+    "displayName": "Calendar"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Calendar": {
+      "type": "blocks"
+    }
+  }
+}

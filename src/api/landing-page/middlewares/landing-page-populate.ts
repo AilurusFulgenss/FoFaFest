@@ -3,7 +3,6 @@
  */
 
 import type { Core } from '@strapi/strapi';
-import globalPopulate from '../../global/middlewares/global-populate';
 
 const populate = {
   blocks:{
@@ -35,12 +34,13 @@ const populate = {
         populate:{
           Clip: true,
         }
-      }
+      },
+      "blocks.calendar": true,
     }
   }
 }
 
-export default (config, { strapi }: { strapi: Core.Strapi }) => {
+export default (_config, { strapi }: { strapi: Core.Strapi }) => {
   // Add your own logic here.
   return async (ctx, next) => {
     strapi.log.info('In landing-page-populate middleware.');

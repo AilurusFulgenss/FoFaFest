@@ -1,5 +1,27 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlocksActivityCard extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_activity_cards';
+  info: {
+    displayName: 'Activity card';
+  };
+  attributes: {
+    Card: Schema.Attribute.Component<'shared.card', true>;
+    Title: Schema.Attribute.Component<'shared.title', false>;
+  };
+}
+
+export interface BlocksCalendar extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_calendars';
+  info: {
+    displayName: 'Calendar';
+  };
+  attributes: {
+    Calendar: Schema.Attribute.Blocks;
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksCardGrid extends Struct.ComponentSchema {
   collectionName: 'components_blocks_card_grids';
   info: {
@@ -89,7 +111,10 @@ export interface SharedCard extends Struct.ComponentSchema {
     displayName: 'Card';
   };
   attributes: {
-    cardImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    cardImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     Heading: Schema.Attribute.String;
     text: Schema.Attribute.Text;
   };
@@ -133,6 +158,16 @@ export interface SharedMap extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedTitle extends Struct.ComponentSchema {
+  collectionName: 'components_shared_titles';
+  info: {
+    displayName: 'Title';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedYoutubeClip extends Struct.ComponentSchema {
   collectionName: 'components_shared_youtube_clips';
   info: {
@@ -147,6 +182,8 @@ export interface SharedYoutubeClip extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'blocks.activity-card': BlocksActivityCard;
+      'blocks.calendar': BlocksCalendar;
       'blocks.card-grid': BlocksCardGrid;
       'blocks.hero': BlocksHero;
       'blocks.section-heading': BlocksSectionHeading;
@@ -158,6 +195,7 @@ declare module '@strapi/strapi' {
       'shared.hero-banner': SharedHeroBanner;
       'shared.link': SharedLink;
       'shared.map': SharedMap;
+      'shared.title': SharedTitle;
       'shared.youtube-clip': SharedYoutubeClip;
     }
   }

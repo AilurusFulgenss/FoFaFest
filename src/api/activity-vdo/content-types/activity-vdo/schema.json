@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "activity_vdos",
+  "info": {
+    "singularName": "activity-vdo",
+    "pluralName": "activity-vdos",
+    "displayName": "ActivityVDO",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "YoutubeBlocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.section-youtube"
+      ]
+    }
+  }
+}
