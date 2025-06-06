@@ -50,6 +50,10 @@ export default ({ env }) => {
     },
   };
 
+  console.log('🧪 DATABASE CLIENT:', client);
+  console.log('🧪 Using connection config:', connections[client]);
+
+
   return {
     connection: {
       client,
