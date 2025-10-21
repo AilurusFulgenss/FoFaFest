@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_details",
+  "info": {
+    "singularName": "project-detail",
+    "pluralName": "project-details",
+    "displayName": "ProjectDetail"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "ShortText": {
+      "type": "text"
+    },
+    "DetailContent": {
+      "type": "blocks"
+    },
+    "Gallery": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

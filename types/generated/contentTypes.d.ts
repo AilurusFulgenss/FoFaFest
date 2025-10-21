@@ -536,65 +536,34 @@ export interface ApiProjectAndActivitieProjectAndActivitie
   };
 }
 
-export interface ApiProjectProject extends Struct.CollectionTypeSchema {
-  collectionName: 'projects';
+export interface ApiProjectDetailProjectDetail
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_details';
   info: {
-    description: '';
-    displayName: 'Project';
-    pluralName: 'projects';
-    singularName: 'project';
+    displayName: 'ProjectDetail';
+    pluralName: 'project-details';
+    singularName: 'project-detail';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    cardImage: Schema.Attribute.Media<
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    DetailContent: Schema.Attribute.Blocks;
+    Gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    Description: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::project.project'
+      'api::project-detail.project-detail'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    quarter: Schema.Attribute.Relation<'oneToOne', 'api::quarter.quarter'>;
-    Title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiQuarterQuarter extends Struct.CollectionTypeSchema {
-  collectionName: 'quarters';
-  info: {
-    description: '';
-    displayName: 'Quarter';
-    pluralName: 'quarters';
-    singularName: 'quarter';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::quarter.quarter'
-    > &
-      Schema.Attribute.Private;
-    project: Schema.Attribute.Relation<'oneToOne', 'api::project.project'>;
-    publishedAt: Schema.Attribute.DateTime;
-    SortOrder: Schema.Attribute.Integer;
+    ShortText: Schema.Attribute.Text;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1116,8 +1085,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::project-and-activitie.project-and-activitie': ApiProjectAndActivitieProjectAndActivitie;
-      'api::project.project': ApiProjectProject;
-      'api::quarter.quarter': ApiQuarterQuarter;
+      'api::project-detail.project-detail': ApiProjectDetailProjectDetail;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
