@@ -4,7 +4,8 @@
   "info": {
     "singularName": "project-detail",
     "pluralName": "project-details",
-    "displayName": "ProjectDetail"
+    "displayName": "ProjectDetail",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,14 +21,21 @@
       "type": "blocks"
     },
     "Gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "project_block": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-block.project-block",
+      "inversedBy": "project_detail"
     }
   }
 }

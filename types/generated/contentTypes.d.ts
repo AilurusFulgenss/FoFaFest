@@ -536,10 +536,50 @@ export interface ApiProjectAndActivitieProjectAndActivitie
   };
 }
 
+export interface ApiProjectBlockProjectBlock
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_blocks';
+  info: {
+    description: '';
+    displayName: 'ProjectBlock';
+    pluralName: 'project-blocks';
+    singularName: 'project-block';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    BlockTitle: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-block.project-block'
+    > &
+      Schema.Attribute.Private;
+    project_detail: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-detail.project-detail'
+    >;
+    project_details: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-detail.project-detail'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    SortOrder: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectDetailProjectDetail
   extends Struct.CollectionTypeSchema {
   collectionName: 'project_details';
   info: {
+    description: '';
     displayName: 'ProjectDetail';
     pluralName: 'project-details';
     singularName: 'project-detail';
@@ -562,6 +602,10 @@ export interface ApiProjectDetailProjectDetail
       'api::project-detail.project-detail'
     > &
       Schema.Attribute.Private;
+    project_block: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::project-block.project-block'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     ShortText: Schema.Attribute.Text;
     Title: Schema.Attribute.String;
@@ -1085,6 +1129,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::project-and-activitie.project-and-activitie': ApiProjectAndActivitieProjectAndActivitie;
+      'api::project-block.project-block': ApiProjectBlockProjectBlock;
       'api::project-detail.project-detail': ApiProjectDetailProjectDetail;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
