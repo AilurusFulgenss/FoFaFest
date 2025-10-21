@@ -563,10 +563,6 @@ export interface ApiProjectBlockProjectBlock
       'oneToMany',
       'api::project-detail.project-detail'
     >;
-    project_details: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::project-detail.project-detail'
-    >;
     publishedAt: Schema.Attribute.DateTime;
     SortOrder: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
