@@ -17,9 +17,9 @@
     "SortOrder": {
       "type": "integer"
     },
-    "projects": {
+    "project": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::project.project",
       "mappedBy": "quarter"
     }

@@ -563,7 +563,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    quarter: Schema.Attribute.Relation<'manyToOne', 'api::quarter.quarter'>;
+    quarter: Schema.Attribute.Relation<'oneToOne', 'api::quarter.quarter'>;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -592,7 +592,7 @@ export interface ApiQuarterQuarter extends Struct.CollectionTypeSchema {
       'api::quarter.quarter'
     > &
       Schema.Attribute.Private;
-    projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
+    project: Schema.Attribute.Relation<'oneToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     SortOrder: Schema.Attribute.Integer;
     Title: Schema.Attribute.String;

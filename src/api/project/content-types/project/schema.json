@@ -30,9 +30,9 @@
     },
     "quarter": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToOne",
       "target": "api::quarter.quarter",
-      "inversedBy": "projects"
+      "inversedBy": "project"
     }
   }
 }
