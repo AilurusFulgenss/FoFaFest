@@ -17,11 +17,6 @@
     "SortOrder": {
       "type": "integer"
     },
-    "project_details": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::project-detail.project-detail"
-    },
     "project_detail": {
       "type": "relation",
       "relation": "oneToMany",
