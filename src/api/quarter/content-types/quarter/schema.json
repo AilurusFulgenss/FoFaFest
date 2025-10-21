@@ -4,7 +4,8 @@
   "info": {
     "singularName": "quarter",
     "pluralName": "quarters",
-    "displayName": "Quarter"
+    "displayName": "Quarter",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,9 +17,9 @@
     "SortOrder": {
       "type": "integer"
     },
-    "project": {
+    "projects": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::project.project",
       "mappedBy": "quarter"
     }
