@@ -31,11 +31,8 @@
         "audios"
       ]
     },
-    "project_block": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::project-block.project-block",
-      "inversedBy": "project_detail"
+    "LegacyID": {
+      "type": "integer"
     }
   }
 }
