@@ -536,43 +536,6 @@ export interface ApiProjectAndActivitieProjectAndActivitie
   };
 }
 
-export interface ApiProjectDetailProjectDetail
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'project_details';
-  info: {
-    description: '';
-    displayName: 'ProjectDetail';
-    pluralName: 'project-details';
-    singularName: 'project-detail';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    DetailContent: Schema.Attribute.Blocks;
-    Gallery: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    LegacyID: Schema.Attribute.Integer;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::project-detail.project-detail'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    ShortText: Schema.Attribute.Text;
-    Title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1087,7 +1050,6 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::project-and-activitie.project-and-activitie': ApiProjectAndActivitieProjectAndActivitie;
-      'api::project-detail.project-detail': ApiProjectDetailProjectDetail;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -116,6 +116,7 @@ export interface SharedCard extends Struct.ComponentSchema {
       true
     >;
     Heading: Schema.Attribute.String;
+    longText: Schema.Attribute.RichText;
     text: Schema.Attribute.Text;
   };
 }

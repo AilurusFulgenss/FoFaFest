@@ -22,6 +22,9 @@
     },
     "text": {
       "type": "text"
+    },
+    "longText": {
+      "type": "richtext"
     }
   }
 }
