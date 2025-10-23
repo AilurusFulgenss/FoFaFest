@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "view_trackers",
+  "info": {
+    "singularName": "view-tracker",
+    "pluralName": "view-trackers",
+    "displayName": "ViewTracker",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ipAddress": {
+      "type": "string",
+      "unique": true
+    },
+    "lastVisitDate": {
+      "type": "date"
+    }
+  }
+}

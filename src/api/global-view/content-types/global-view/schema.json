@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "global_views",
+  "info": {
+    "singularName": "global-view",
+    "pluralName": "global-views",
+    "displayName": "GlobalView",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "totalViews": {
+      "type": "integer"
+    }
+  }
+}

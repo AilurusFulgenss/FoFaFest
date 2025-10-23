@@ -434,6 +434,35 @@ export interface ApiDownloadPageDownloadPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiGlobalViewGlobalView extends Struct.SingleTypeSchema {
+  collectionName: 'global_views';
+  info: {
+    description: '';
+    displayName: 'GlobalView';
+    pluralName: 'global-views';
+    singularName: 'global-view';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::global-view.global-view'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    totalViews: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -527,6 +556,36 @@ export interface ApiProjectAndActivitieProjectAndActivitie
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::project-and-activitie.project-and-activitie'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiViewTrackerViewTracker extends Struct.CollectionTypeSchema {
+  collectionName: 'view_trackers';
+  info: {
+    description: '';
+    displayName: 'ViewTracker';
+    pluralName: 'view-trackers';
+    singularName: 'view-tracker';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ipAddress: Schema.Attribute.String & Schema.Attribute.Unique;
+    lastVisitDate: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::view-tracker.view-tracker'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -1047,9 +1106,11 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::activity-vdo.activity-vdo': ApiActivityVdoActivityVdo;
       'api::download-page.download-page': ApiDownloadPageDownloadPage;
+      'api::global-view.global-view': ApiGlobalViewGlobalView;
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::project-and-activitie.project-and-activitie': ApiProjectAndActivitieProjectAndActivitie;
+      'api::view-tracker.view-tracker': ApiViewTrackerViewTracker;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
