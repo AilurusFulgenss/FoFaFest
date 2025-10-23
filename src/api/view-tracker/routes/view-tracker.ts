@@ -1,21 +1,17 @@
-/**
- * view-tracker router
- */
+// src/api/view-tracker/routes/view-tracker.ts
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::view-tracker.view-tracker');
-
-module.exports = {
+// ไม่ต้อง import factories จาก @strapi/strapi ถ้ามีแค่ Custom Route
+export default {
   routes: [
     {
       method: 'POST',
-      path: '/views-tracker/track',
-      // ชี้ไปยัง Controller ที่ชื่อ 'view-tracker' และฟังก์ชัน 'trackView'
+      path: '/views-tracker/track', 
       handler: 'view-tracker.trackView', 
       config: {
-        auth: false // ไม่ต้องการการยืนยันตัวตน
+        auth: false,
+        policies: [],
       }
     },
+    // หากต้องการใช้ default routes ของ Content Type ให้สร้างไฟล์อื่น
   ],
 };

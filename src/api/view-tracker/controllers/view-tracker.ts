@@ -1,14 +1,9 @@
-/**
- * view-tracker controller
- */
+// src/api/view-tracker/controllers/view-tracker.ts
 
-import { factories } from '@strapi/strapi'
+import { factories } from '@strapi/strapi';
 
-export default factories.createCoreController('api::view-tracker.view-tracker');
-
-const { createCoreController } = require('@strapi/strapi').factories;
-
-module.exports = createCoreController('api::view-tracker.view-tracker', ({ strapi }) => ({
+export default factories.createCoreController('api::view-tracker.view-tracker', ({ strapi }) => ({
+  // ฟังก์ชัน Custom Logic ต้องถูกวางไว้ใน Object ที่ return
   async trackView(ctx) {
     const ipAddress = ctx.request.ip; 
     const today = new Date().toISOString().split('T')[0]; 
@@ -16,53 +11,49 @@ module.exports = createCoreController('api::view-tracker.view-tracker', ({ strap
     if (!ipAddress) {
         return ctx.badRequest('Unable to resolve IP address.');
     }
-
+    
     try {
-      // 1. ค้นหา IP
-      let tracker = await strapi.db.query('api::view-tracker.view-tracker').findOne({ 
-        where: { ipAddress: ipAddress } 
-      });
-
-      let shouldCount = false;
-      let globalView = await strapi.db.query('api::global-view.global-view').findOne({});
-      const globalViewId = globalView?.id;
-
-      if (!tracker) {
-        // 2a. IP ใหม่: สร้าง Record และนับ
-        await strapi.db.query('api::view-tracker.view-tracker').create({
-          data: { ipAddress: ipAddress, lastVisitDate: today }
+        let tracker = await strapi.db.query('api::view-tracker.view-tracker').findOne({ 
+            where: { ipAddress: ipAddress } 
         });
-        shouldCount = true;
-      } else {
-        // 2b. IP เดิม: ตรวจสอบวันที่
-        const lastVisit = new Date(tracker.lastVisitDate).toISOString().split('T')[0];
-        
-        if (lastVisit !== today) {
-          // 3. เข้าชมวันใหม่: อัปเดตวันที่และนับ
-          await strapi.db.query('api::view-tracker.view-tracker').update({
-            where: { id: tracker.id },
-            data: { lastVisitDate: today }
-          });
-          shouldCount = true;
+
+        let shouldCount = false;
+        // ใช้ findOne() โดยไม่มี where เพื่อดึง Single Type
+        let globalView = await strapi.db.query('api::global-view.global-view').findOne({});
+        const globalViewId = globalView?.id;
+
+        if (!tracker) {
+            await strapi.db.query('api::view-tracker.view-tracker').create({
+                data: { ipAddress: ipAddress, lastVisitDate: today }
+            });
+            shouldCount = true;
+        } else {
+            const lastVisit = new Date(tracker.lastVisitDate).toISOString().split('T')[0];
+            
+            if (lastVisit !== today) {
+                await strapi.db.query('api::view-tracker.view-tracker').update({
+                    where: { id: tracker.id },
+                    data: { lastVisitDate: today }
+                });
+                shouldCount = true;
+            }
         }
-      }
 
-      if (shouldCount && globalViewId) {
-        // 4. เพิ่มยอดรวม GlobalView
-        const newViews = (globalView.totalViews || 0) + 1;
-        await strapi.db.query('api::global-view.global-view').update({
-          where: { id: globalViewId },
-          data: { totalViews: newViews }
-        });
-        globalView.totalViews = newViews; 
-      }
-      
-      // 5. ส่งผลลัพธ์กลับไป 
-      return { data: { totalViews: globalView.totalViews, counted: shouldCount } };
+        if (shouldCount && globalViewId) {
+            const newViews = (globalView.totalViews || 0) + 1;
+            await strapi.db.query('api::global-view.global-view').update({
+                where: { id: globalViewId },
+                data: { totalViews: newViews }
+            });
+            globalView.totalViews = newViews; 
+        }
+        
+        // Strapi V5 Controller ควร return Object ที่มี key เป็น 'data' 
+        return { data: { totalViews: globalView.totalViews, counted: shouldCount } };
 
     } catch (error) {
       console.error("Error in trackView:", error);
-      return ctx.internalServerError('Tracking failed due to server error.');
+      return ctx.internalServerError('Tracking failed due to server error. Check database connections and permissions.');
     }
   }
 }));
