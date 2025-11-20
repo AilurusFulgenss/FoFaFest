@@ -9,8 +9,12 @@ const populate = {
     LoadBlocks:{
       on:{
         "blocks.activity-card":{
+          Title: {
+            populate: "*"
+          },
           populate:{
             Card:{
+              title:true,
               populate:{
                 cardImage: {
                   fields: ["alternativeText", "url"]
