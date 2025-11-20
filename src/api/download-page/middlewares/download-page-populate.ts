@@ -9,10 +9,10 @@ const populate = {
     LoadBlocks:{
       on:{
         "blocks.activity-card":{
-          Title: {
+          populate:{
+            Title: {
             populate: "*"
           },
-          populate:{
             Card:{
               title:true,
               populate:{
