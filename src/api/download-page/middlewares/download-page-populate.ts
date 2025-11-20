@@ -6,26 +6,27 @@ import type { Core } from '@strapi/strapi';
 import { createDecipheriv } from 'crypto';
 
 const populate = {
-    LoadBlocks:{
-      on:{
-        "blocks.activity-card":{
-          populate:{
-            Title: {
+  LoadBlocks: {
+    on: {
+      "blocks.activity-card": {
+        populate: {
+          // 1. ส่วน Title (ถูกต้องแล้ว)
+          Title: {
             populate: "*"
           },
-            Card:{
-              title:true,
-              populate:{
-                cardImage: {
-                  fields: ["alternativeText", "url"]
-                }
+          // 2. ส่วน Card (ลบ title: true ออก)
+          Card: {
+            populate: {
+              cardImage: {
+                fields: ["alternativeText", "url"]
               }
             }
+          }
         }
       }
     }
   }
-}
+};
 
 export default (config, { strapi }: { strapi: Core.Strapi }) => {
   // Add your own logic here.
