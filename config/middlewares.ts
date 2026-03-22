@@ -8,6 +8,7 @@ export default [
       origin: [
         'https://fofaswu.com',
         'https://cool-cloud-1799.kudatonnam.workers.dev',
+        'http://localhost:8080',
         'http://localhost:3000',
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
